@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- OWASP A05: Content Security Policy — restricts resource origins to mitigate XSS.
+       'unsafe-inline' is required because this page uses inline scripts.
+       Nonce-based CSP would require a server-side build step. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https:;" />
+  <title>Admin — ProtoSpark</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #6C3FF6; --purple-light: #EDE9FE;
+      --pink: #F43F8E; --pink-light: #FCE7F3;
+      --teal: #0ED4A7; --teal-light: #CCFBF1;
+      --bg: #F7F4FF; --surface: #fff;
+      --border: #E8E2FF; --text: #1A1040;
+      --text-mid: #4A3F6B; --text-muted: #8B7AAB;
+      --red: #e53e3e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .mono { font-family: 'Space Mono', monospace; }
+
+    /* Login */
+    .login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+    }
+    .login-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 48px; max-width: 420px; width: 100%;
+      box-shadow: 0 8px 40px rgba(108,63,246,0.12); text-align: center;
+    }
+    .login-logo { margin-bottom: 16px; }
+    .login-logo img { width: 72px; height: 72px; object-fit: contain; }
+    .login-card h2 { margin-bottom: 8px; }
+    .login-card p { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 28px; }
+    .login-card input {
+      width: 100%; padding: 14px 18px; border: 1.5px solid var(--border);
+      border-radius: 12px; font-size: 1rem; font-family: 'Inter', sans-serif;
+      background: var(--bg); color: var(--text); outline: none; margin-bottom: 12px;
+      transition: border-color 0.15s;
+    }
+    .login-card input:focus { border-color: var(--purple); background: #fff; }
+    .login-card button {
+      width: 100%; padding: 14px; background: var(--purple); color: #fff;
+      border: none; border-radius: 50px; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.15s;
+    }
+    .login-card button:hover { background: #5b35d4; }
+    .login-error {
+      background: #fff5f5; border: 1px solid #fbb; border-radius: 10px;
+      padding: 10px 14px; font-size: 0.85rem; color: var(--red); margin-bottom: 12px;
+      display: none;
+    }
+    .login-error.show { display: block; }
+
+    /* Admin UI */
+    .admin-screen { display: none; }
+    .admin-screen.show { display: block; }
+    .admin-header {
+      background: var(--text); color: #fff; padding: 20px 32px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap;
+    }
+    .admin-header h1 { font-size: 1.3rem; }
+    .admin-header-right { display: flex; align-items: center; gap: 12px; }
+    .badge-count {
+      background: var(--purple); color: #fff; font-size: 0.75rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; font-family: 'Space Mono', monospace;
+    }
+    .logout-btn {
+      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15); padding: 8px 16px;
+      border-radius: 50px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .logout-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+    .admin-body { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+    .tab-btn {
+      padding: 10px 24px; border-radius: 50px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; border: 2px solid var(--border);
+      background: var(--surface); color: var(--text-mid); transition: all 0.15s;
+    }
+    .tab-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .toolbar h3 { font-size: 1rem; color: var(--text-mid); }
+    .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .action-btn {
+      padding: 8px 18px; border-radius: 50px; border: 1.5px solid;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn-export { background: var(--teal-light); color: #0a7a62; border-color: #a7f3d0; }
+    .btn-export:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .btn-clear { background: #fff5f5; color: var(--red); border-color: #fbb; }
+    .btn-clear:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center; padding: 64px 24px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+    .empty-state h4 { font-size: 1.1rem; margin-bottom: 6px; }
+    .empty-state p { color: var(--text-muted); font-size: 0.875rem; }
+
+    /* Table */
+    .table-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    thead th {
+      background: var(--purple-light); color: var(--purple);
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 14px 16px; text-align: left; white-space: nowrap;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--bg); }
+    tbody td { padding: 12px 16px; color: var(--text-mid); vertical-align: top; line-height: 1.5; }
+    .cell-mono { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-muted); }
+
+    /* Volunteer table — wider fields */
+    .textarea-cell { max-width: 280px; white-space: pre-wrap; word-break: break-word; }
+  </style>
+</head>
+<body>
+
+  <!-- ── LOGIN ── -->
+  <div class="login-screen" id="login-screen">
+    <div class="login-card">
+      <div class="login-logo"><img src="assets/logo.png" alt="ProtoSpark" /></div>
+      <h2>ProtoSpark Admin</h2>
+      <p>Enter the admin password to view form submissions.</p>
+      <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
+      <input type="password" id="password-input" placeholder="Admin password" autocomplete="off" />
+      <button onclick="checkPassword()">Sign In →</button>
+    </div>
+  </div>
+
+  <!-- ── ADMIN UI ── -->
+  <div class="admin-screen" id="admin-screen">
+    <div class="admin-header">
+      <h1><img src="assets/logo.png" alt="" style="width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px;">ProtoSpark · Form Responses</h1>
+      <div class="admin-header-right">
+        <span class="badge-count mono" id="total-count">0 total</span>
+        <button class="logout-btn" onclick="logout()">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="admin-body">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('students', this)">🧒 Student Registrations</button>
+        <button class="tab-btn" onclick="switchTab('volunteers', this)">🙋 Volunteer Applications</button>
+      </div>
+
+      <!-- Students tab -->
+      <div class="tab-panel active" id="tab-students">
+        <div class="toolbar">
+          <h3 id="students-count">— registrations</h3>
+          <div class="toolbar-actions">
+            <button class="action-btn btn-export" onclick="exportCSV('students')">⬇ Export CSV</button>
+            <button class="action-btn" style="background:var(--purple-light);color:var(--purple);border-color:#c4b5fd;" onclick="loadData()">↻ Refresh</button>
+          </div>
+        </div>
+        <div id="students-content"></div>
+      </div>
+
+      <!-- Volunteers tab -->
+      <div class="tab-panel" id="tab-volunteers">
+        <div class="toolbar">
+          <h3 id="volunteers-count">— applications</h3>
+          <div class="toolbar-actions">
+            <button class="action-btn btn-export" onclick="exportCSV('volunteers')">⬇ Export CSV</button>
+            <button class="action-btn" style="background:var(--purple-light);color:var(--purple);border-color:#c4b5fd;" onclick="loadData()">↻ Refresh</button>
+          </div>
+        </div>
+        <div id="volunteers-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── SECURITY CONFIG ──────────────────────────────────────────────────────
+    // Password stored as SHA-256 hash — plaintext never in source.
+    // To rotate: run sha256("newPassword") in DevTools and update ADMIN_HASH.
+    // SHEETS_URL / SUBMIT_TOKEN are intentionally client-visible (static site).
+    // To rotate SUBMIT_TOKEN: update here AND in the Google Apps Script.
+    const ADMIN_HASH   = 'c8c9af5de85966bf235a0fb9f0523862e448ac34e5d289c770dced5e5d868c66';
+    const PS_CONFIG    = {
+      SHEETS_URL:   'https://script.google.com/macros/s/AKfycbzugPKwhraPlb8_tHraEZCzaVWCitXPd7MKyoKQkekZZeSODVVD3sNUf-1AzzgiUKvP/exec',
+      SUBMIT_TOKEN: '36e972b692cf7acfc7a87c62afedbe065efe3bbe05cc94bf',
+    };
+    // ─────────────────────────────────────────────────────────────────────────
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // OWASP A07: Brute-force protection — persisted in localStorage so page
+    // reloads do NOT reset the lockout. Progressive delays:
+    //   ≥ 5 failures  → locked 2 minutes
+    //   ≥ 10 failures → locked 15 minutes
+    //   ≥ 15 failures → locked 1 hour
+    const LOGIN_LS_KEY = 'ps_admin_login';
+    function _loadLoginState() {
+      try { return JSON.parse(localStorage.getItem(LOGIN_LS_KEY)) || { failCount: 0, lockedUntil: 0 }; }
+      catch { return { failCount: 0, lockedUntil: 0 }; }
+    }
+    function _saveLoginState(s) {
+      try { localStorage.setItem(LOGIN_LS_KEY, JSON.stringify(s)); } catch {}
+    }
+
+    async function checkPassword() {
+      const state = _loadLoginState();
+      const now   = Date.now();
+
+      // Check active lockout before doing anything else
+      if (now < state.lockedUntil) {
+        const secs = Math.ceil((state.lockedUntil - now) / 1000);
+        const msg  = secs > 60 ? `${Math.ceil(secs / 60)} minutes` : `${secs} seconds`;
+        document.getElementById('login-error').textContent = `Too many attempts. Try again in ${msg}.`;
+        document.getElementById('login-error').classList.add('show');
+        return;
+      }
+
+      const input = document.getElementById('password-input').value;
+      const err   = document.getElementById('login-error');
+      const hash  = await sha256(input);
+
+      if (hash === ADMIN_HASH) {
+        // Success — clear lockout state
+        _saveLoginState({ failCount: 0, lockedUntil: 0 });
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-screen').classList.add('show');
+        loadData();
+      } else {
+        state.failCount = (state.failCount || 0) + 1;
+
+        // Progressive lockout thresholds
+        if (state.failCount >= 15)      state.lockedUntil = now + 60 * 60 * 1000;  // 1 hr
+        else if (state.failCount >= 10) state.lockedUntil = now + 15 * 60 * 1000;  // 15 min
+        else if (state.failCount >= 5)  state.lockedUntil = now +  2 * 60 * 1000;  // 2 min
+
+        _saveLoginState(state);
+
+        if (state.lockedUntil > now) {
+          const mins = Math.ceil((state.lockedUntil - now) / 60000);
+          err.textContent = `Too many attempts. Locked for ${mins} minute${mins !== 1 ? 's' : ''}.`;
+        } else {
+          const left = 5 - state.failCount;
+          err.textContent = left > 0
+            ? `Incorrect password. ${left} attempt${left !== 1 ? 's' : ''} remaining.`
+            : 'Incorrect password.';
+        }
+        err.classList.add('show');
+        document.getElementById('password-input').value = '';
+      }
+    }
+
+    document.getElementById('password-input')?.addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkPassword();  // async — no await needed here
+    });
+
+    function logout() {
+      document.getElementById('admin-screen').classList.remove('show');
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('password-input').value = '';
+    }
+
+    function switchTab(name, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+      const count = name === 'students' ? _lastStudents.length : _lastVolunteers.length;
+      const label = name === 'students' ? 'registration' : 'application';
+      document.getElementById('total-count').textContent = count + ' ' + label + (count !== 1 ? 's' : '');
+    }
+
+    async function fetchAllSheets() {
+      try {
+        const res = await fetch(PS_CONFIG.SHEETS_URL + '?token=' + PS_CONFIG.SUBMIT_TOKEN);
+        const json = await res.json();
+        if (json.status === 'ok' && json.data) return json.data;
+        return { Students: [], Volunteers: [] };
+      } catch {
+        return { Students: [], Volunteers: [] };
+      }
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) +
+             ' ' + d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function escape(str) {
+      if (!str) return '—';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function renderStudents(data) {
+      const el = document.getElementById('students-content');
+      document.getElementById('students-count').textContent = data.length + ' registration' + (data.length !== 1 ? 's' : '');
+      if (!data.length) {
+        el.innerHTML = `<div class="empty-state"><div class="icon">📋</div><h4>No registrations yet</h4><p>Student registrations from the summer camp form will appear here.</p></div>`;
+        return;
+      }
+      const rows = data.map((r, i) => `
+        <tr>
+          <td class="cell-mono">${i + 1}</td>
+          <td>${escape(r.parent_name)}</td>
+          <td>${escape(r.student_name)}</td>
+          <td>${escape(r.contact_preference)}</td>
+          <td>${escape(r.parent_email)}</td>
+          <td>${escape(r.parent_phone) === '—' ? '<span style="opacity:.4">—</span>' : escape(r.parent_phone)}</td>
+          <td>${escape(r.age_group)}</td>
+          <td class="textarea-cell">${escape(r.timing_questions) === '—' ? '<span style="opacity:.4">—</span>' : escape(r.timing_questions)}</td>
+          <td class="cell-mono">${fmtDate(r._timestamp)}</td>
+        </tr>`).join('');
+      el.innerHTML = `<div class="table-wrap"><table>
+        <thead><tr>
+          <th>#</th><th>Parent Name</th><th>Student Name</th>
+          <th>Contact Pref.</th><th>Parent Email</th><th>Phone</th>
+          <th>Age Group</th><th>Timing Notes</th><th>Submitted</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>`;
+    }
+
+    function renderVolunteers(data) {
+      const el = document.getElementById('volunteers-content');
+      document.getElementById('volunteers-count').textContent = data.length + ' application' + (data.length !== 1 ? 's' : '');
+      if (!data.length) {
+        el.innerHTML = `<div class="empty-state"><div class="icon">🙋</div><h4>No applications yet</h4><p>Volunteer applications will appear here once submitted.</p></div>`;
+        return;
+      }
+      const rows = data.map((r, i) => `
+        <tr>
+          <td class="cell-mono">${i + 1}</td>
+          <td>${escape(r.full_name)}</td>
+          <td>${escape(r.email)}</td>
+          <td>${escape(r.phone) === '—' ? '<span style="opacity:.4">—</span>' : escape(r.phone)}</td>
+          <td>${escape(r.region)}</td>
+          <td>${escape(r.time_zone)}</td>
+          <td>${escape(r.languages)}</td>
+          <td class="textarea-cell">${escape(r.coding_background)}</td>
+          <td class="textarea-cell">${escape(r.motivation)}</td>
+          <td class="textarea-cell">${escape(r.leadership_qualities)}</td>
+          <td class="cell-mono">${fmtDate(r._timestamp)}</td>
+        </tr>`).join('');
+      el.innerHTML = `<div class="table-wrap"><table>
+        <thead><tr>
+          <th>#</th><th>Name</th><th>Email</th><th>Phone</th>
+          <th>Region</th><th>Timezone</th><th>Languages</th>
+          <th>Coding Background</th><th>Motivation</th><th>Leadership</th><th>Submitted</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>`;
+    }
+
+    // Cache populated by loadData, used by exportCSV
+    let _lastStudents = [];
+    let _lastVolunteers = [];
+
+    async function loadData() {
+      document.getElementById('total-count').textContent = 'Loading…';
+
+      const { Students: students, Volunteers: volunteers } = await fetchAllSheets();
+
+      _lastStudents = students;
+      _lastVolunteers = volunteers;
+      document.getElementById('total-count').textContent = students.length + ' registration' + (students.length !== 1 ? 's' : '');
+      renderStudents(students);
+      renderVolunteers(volunteers);
+    }
+
+    function clearData(type) {
+      alert('To clear submissions, delete the rows directly in Google Sheets.');
+    }
+
+    function exportCSV(type) {
+      const data = type === 'students' ? _lastStudents : _lastVolunteers;
+      if (!data.length) { alert('No data to export.'); return; }
+
+      const keys = type === 'students'
+        ? ['_timestamp','parent_name','student_name','contact_preference','parent_email','parent_phone','age_group','timing_questions']
+        : ['_timestamp','full_name','email','phone','region','time_zone','languages','coding_background','motivation','leadership_qualities'];
+
+      const headers = type === 'students'
+        ? ['Timestamp','Parent Name','Student Name','Contact Preference','Parent Email','Parent Phone','Age Group','Timing Notes']
+        : ['Timestamp','Full Name','Email','Phone','Region','Timezone','Languages','Coding Background','Motivation','Leadership Qualities'];
+
+      const csvRows = [headers.join(',')];
+      data.forEach(row => {
+        const vals = keys.map(k => {
+          const v = row[k] || '';
+          return '"' + String(v).replace(/"/g, '""') + '"';
+        });
+        csvRows.push(vals.join(','));
+      });
+
+      const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `protospark_${type}_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

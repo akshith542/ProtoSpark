@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volunteer to Teach Kids to Code — ProtoSpark</title>
+  <meta name="description" content="Volunteer with ProtoSpark — a free, student-led nonprofit. Teach Scratch coding to kids worldwide, lead a country chapter, translate curriculum, or support outreach. All levels welcome." />
+  <meta name="keywords" content="volunteer to teach coding, kids coding volunteer, nonprofit volunteer opportunity, teach kids programming, Scratch coding volunteer, chapter leader nonprofit" />
+  <link rel="canonical" href="https://protospark.org/volunteer.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Volunteer to Teach Kids to Code — ProtoSpark" />
+  <meta property="og:description" content="Help bring free coding education to children worldwide. Lead a chapter, teach Scratch sessions, translate curriculum, or support outreach. Apply to volunteer." />
+  <meta property="og:url" content="https://protospark.org/volunteer.html" />
+  <meta property="og:image" content="https://protospark.org/assets/logo.png" />
+  <meta property="og:site_name" content="ProtoSpark" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Volunteer to Teach Kids to Code — ProtoSpark" />
+  <meta name="twitter:description" content="Help bring free coding education to children worldwide. Lead a chapter, teach Scratch sessions, or translate curriculum." />
+  <meta name="twitter:image" content="https://protospark.org/assets/logo.png" />
+  <!-- OWASP A05: Content Security Policy — restricts resource origins to mitigate XSS.
+       'unsafe-inline' required for inline scripts; nonces need a server-side build step. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com; connect-src 'self' https:;" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ───────────────── NAV ───────────────── -->
+  <header class="nav-wrapper">
+    <nav class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="ProtoSpark Logo" class="logo-img" />
+        <span class="logo-text">Proto<span class="logo-accent">Spark</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="summer-camp.html">Summer Camp</a></li>
+        <li><a href="volunteer.html" aria-current="page">Volunteer</a></li>
+        <li><a href="team.html">Our Team</a></li>
+      </ul>
+      <a href="summer-camp.html" class="btn btn-nav">Register a Student</a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="nav-dropdown" id="nav-dropdown">
+      <a href="index.html">Home</a>
+      <a href="summer-camp.html">Summer Camp</a>
+      <a href="volunteer.html">Volunteer</a>
+      <a href="team.html">Our Team</a>
+      <a href="summer-camp.html" class="btn btn-nav">Register a Student</a>
+    </div>
+  </header>
+
+  <!-- ───────────────── PAGE HERO ───────────────── -->
+  <section class="page-hero" style="background: linear-gradient(135deg, var(--pink-light) 0%, var(--bg) 100%);">
+    <div class="container page-hero-inner">
+      <div class="page-hero-content">
+        <div class="page-hero-label">Get Involved</div>
+        <h1>Volunteer with <span class="highlight-pink">ProtoSpark</span> 🙋</h1>
+        <p>Help us bring free coding education to children around the world. Lead a chapter, teach sessions, translate curriculum, or support global operations — every role matters.</p>
+        <a href="#apply" class="btn btn-secondary" style="margin-top: 24px;">Apply to Volunteer →</a>
+      </div>
+      <div class="page-hero-deco">
+        <div class="deco-card">
+          <div style="font-size:0.78rem; font-weight:700; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:14px;">Open Roles</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:center; gap:10px; font-size:0.88rem; font-weight:600;"><span style="font-size:1.2rem;">🗺️</span> Chapter Leader</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:0.88rem; font-weight:600;"><span style="font-size:1.2rem;">👩‍🏫</span> Instructor / TA</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:0.88rem; font-weight:600;"><span style="font-size:1.2rem;">🌐</span> Translator</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:0.88rem; font-weight:600;"><span style="font-size:1.2rem;">📣</span> Outreach &amp; Marketing</div>
+          </div>
+        </div>
+        <div class="deco-card-sm top-right" style="color:var(--pink);">🙋 Apply Now</div>
+        <div class="deco-card-sm mid-left" style="color:var(--purple);">✨ All levels welcome</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── CHAPTER SYSTEM ───────────────── -->
+  <section class="chapters section" id="chapters">
+    <div class="container">
+      <div class="section-label">Global Organization</div>
+      <h2 class="section-title">One Chapter. <span class="highlight-pink">Every Country.</span></h2>
+      <p class="section-sub">
+        ProtoSpark scales internationally through a chapter system — one chapter per country, each led by a local Chapter Leader who bridges language, time zone, and cultural gaps.
+      </p>
+      <div class="chapters-layout">
+        <div class="chapter-model">
+          <h3 class="mono">// How Chapters Work</h3>
+          <div class="chapter-step">
+            <span class="step-num">01</span>
+            <div>
+              <strong>Local Chapter Leader</strong>
+              <p>A volunteer in each country runs their chapter, recruits local students, and coordinates with the global team on scheduling.</p>
+            </div>
+          </div>
+          <div class="chapter-step">
+            <span class="step-num">02</span>
+            <div>
+              <strong>Language Bridging</strong>
+              <p>Chapter leaders translate instructions and check-ins into their local language. Core curriculum materials are translated before camp begins.</p>
+            </div>
+          </div>
+          <div class="chapter-step">
+            <span class="step-num">03</span>
+            <div>
+              <strong>Time Zone Management</strong>
+              <p>Sessions are recorded and posted for asynchronous viewing. Live sessions are scheduled to accommodate the most students; chapter leaders run supplemental local sessions where needed.</p>
+            </div>
+          </div>
+          <div class="chapter-step">
+            <span class="step-num">04</span>
+            <div>
+              <strong>Centralized Coordination</strong>
+              <p>All chapters coordinate via shared tools (Discord, Google Workspace). Standups twice a week keep the global team aligned.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter-requirements">
+          <div class="req-card">
+            <h3>Become a Chapter Leader</h3>
+            <p class="req-sub">Leadership roles are open to teens and young adults worldwide.</p>
+            <ul class="req-list">
+              <li><span class="req-check">✓</span> Recruit at least 3 students from your country</li>
+              <li><span class="req-check">✓</span> Bilingual: English + your local language</li>
+              <li><span class="req-check">✓</span> Basic knowledge of Scratch (or willing to learn)</li>
+              <li><span class="req-check">✓</span> Communicate with the global team via Slack workspace</li>
+              <li><span class="req-check">✓</span> Passionate about making CS education accessible</li>
+            </ul>
+          </div>
+          <div class="globe-visual">
+            <div class="globe-ring ring-1"></div>
+            <div class="globe-ring ring-2"></div>
+            <div class="globe-ring ring-3"></div>
+            <div class="globe-center">🌍</div>
+            <div class="chapter-pin pin-1"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/us.png" alt="US" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span></div>
+            <div class="chapter-pin pin-2"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/in.png" alt="IN" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span></div>
+            <div class="chapter-pin pin-3"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/br.png" alt="BR" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span></div>
+            <div class="chapter-pin pin-4"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/ng.png" alt="NG" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span></div>
+            <div class="chapter-pin pin-5"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/ph.png" alt="PH" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── ROLES ───────────────── -->
+  <section class="section" style="background: var(--bg-alt);" id="roles">
+    <div class="container">
+      <div class="section-label">Open Roles</div>
+      <h2 class="section-title">How You Can <span class="highlight-purple">Contribute</span></h2>
+      <div class="about-cards">
+        <div class="about-card card-purple">
+          <div class="card-icon">🗺️</div>
+          <h3>Chapter Leader</h3>
+          <p>Lead your country's chapter. Recruit students, attend standups, and bridge local language &amp; time zones.</p>
+        </div>
+        <div class="about-card card-pink">
+          <div class="card-icon">👩‍🏫</div>
+          <h3>Instructor / TA</h3>
+          <p>Teach or assist live Scratch sessions using our ready-made curriculum. No prior teaching experience required.</p>
+        </div>
+        <div class="about-card card-teal">
+          <div class="card-icon">🌐</div>
+          <h3>Translator</h3>
+          <p>Translate lesson materials into your native language so students can learn in their mother tongue.</p>
+        </div>
+        <div class="about-card card-yellow">
+          <div class="card-icon">📣</div>
+          <h3>Outreach &amp; Marketing</h3>
+          <p>Create social content, design flyers, or run social media to grow ProtoSpark's reach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── VOLUNTEER APPLICATION FORM ───────────────── -->
+  <section class="reg-section alt section" id="apply">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;">Apply to <span class="highlight-pink">Volunteer</span></h2>
+      <p class="section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">
+        Fill out the form below to apply as a Scratch regional leader or volunteer. We review applications on a rolling basis and will follow up within a week.
+      </p>
+      <div class="form-wrapper">
+        <div class="form-card">
+          <div class="form-card-header pink-bg">
+            <span class="form-emoji">🙋</span>
+            <h3>Leadership Application</h3>
+            <p>Apply to become a Scratch regional leader or volunteer for ProtoSpark. Tell us about yourself, your background, and why you'd be a great fit.</p>
+          </div>
+          <form class="form-body pink-form" id="volunteer-form" novalidate>
+            <div class="form-mission pink">
+              This form is for people who want to become Scratch regional leaders or volunteers for ProtoSpark. We need leaders who can communicate in English and at least one other language, and who are passionate about making coding education accessible to children worldwide.
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="vol-name">Full Name *</label>
+                <input type="text" id="vol-name" name="full_name" placeholder="Your full name" required minlength="2" maxlength="100" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="vol-email">Email Address *</label>
+                <input type="email" id="vol-email" name="email" placeholder="email@example.com" required maxlength="254" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="vol-phone">Phone Number</label>
+                <!-- pattern allows digits, spaces, dashes, dots, parens, and leading + for country code -->
+                <input type="tel" id="vol-phone" name="phone" placeholder="Optional — include country code" maxlength="30" pattern="^[+\d][\d\s\-().]{0,28}$" autocomplete="tel" />
+              </div>
+              <div class="form-group">
+                <label for="vol-region">Region / Country *</label>
+                <input type="text" id="vol-region" name="region" placeholder="e.g. Nigeria, Southeast Asia, etc." required minlength="2" maxlength="100" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="vol-timezone">Time Zone *</label>
+                <input type="text" id="vol-timezone" name="time_zone" placeholder="e.g. EST, WAT, IST, GMT+8" required minlength="2" maxlength="50" />
+              </div>
+              <div class="form-group">
+                <label for="vol-languages">Languages Spoken *</label>
+                <input type="text" id="vol-languages" name="languages" placeholder="e.g. English, Yoruba, Spanish" required minlength="2" maxlength="200" />
+                <span class="hint">Must include English. List all languages you speak.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="vol-role">What role are you interested in? *</label>
+              <select id="vol-role" name="role_interest" required>
+                <option value="" disabled selected>Select a role</option>
+                <option value="Chapter Leader">🗺️ Chapter Leader</option>
+                <option value="Instructor / TA">👩‍🏫 Instructor / TA</option>
+                <option value="Translator">🌐 Translator</option>
+                <option value="Outreach & Marketing">📣 Outreach &amp; Marketing</option>
+                <option value="Not sure yet">🤔 Not sure yet — open to anything</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="vol-background">Scratch / Coding Background *</label>
+              <textarea id="vol-background" name="coding_background" placeholder="Tell us what you've done — e.g. taught coding before, competed in hackathons, built Scratch projects, took CS courses, related volunteer experience, etc." required minlength="20" maxlength="3000"></textarea>
+              <span class="hint">Any experience is welcome — we're looking for enthusiasm and willingness to learn.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="vol-motivation">Why do you want to be a regional leader? *</label>
+              <textarea id="vol-motivation" name="motivation" placeholder="Tell us your motivation and what draws you to ProtoSpark's mission…" required minlength="20" maxlength="3000"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="vol-leadership">Leadership qualities — especially in tough situations *</label>
+              <textarea id="vol-leadership" name="leadership_qualities" placeholder="Describe a situation where you showed leadership under pressure, or explain what leadership qualities you'd bring to this role…" required minlength="20" maxlength="3000"></textarea>
+            </div>
+
+            <div class="hp-field" aria-hidden="true"><input type="text" name="_hp" tabindex="-1" autocomplete="off" /></div>
+            <button type="submit" class="btn btn-secondary full-width">Submit Application →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── FAQ ───────────────── -->
+  <section class="faq section" id="faq" style="background: var(--bg);">
+    <div class="container container-narrow">
+      <div class="section-label">Questions</div>
+      <h2 class="section-title">Volunteer FAQ</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Do I need to be an expert in coding to volunteer?</summary>
+          <p>Not at all. A willingness to learn is more important than prior experience. We provide training on the curriculum and Scratch before the camp starts — you'll feel fully prepared.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How much time does volunteering require?</summary>
+          <p>It depends on your role. Instructors commit to the 5-day camp window (Aug 3–7). Chapter leaders have slightly more involvement — coordinating students in their region and communicating with the global team via Slack. We're flexible and work around your schedule.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is a Chapter Leader?</summary>
+          <p>A Chapter Leader runs ProtoSpark's presence in their country. They recruit local students, bridge language gaps, and coordinate with the global team through our Slack workspace. Each country has one chapter, and we're actively growing our network.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need to speak English?</summary>
+          <p>English is our working language for the global team. Chapter leaders and volunteers need to be comfortable in English, though bilingualism is a huge asset — it lets you support students who don't speak English.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will I get a certificate or letter of involvement?</summary>
+          <p>Yes — all volunteers receive a letter confirming their role and hours of service with ProtoSpark, a registered 501(c)(3) nonprofit. This is great for college applications, resumes, and community service records.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I volunteer if I'm outside the US?</summary>
+          <p>Absolutely — that's the whole point. ProtoSpark is a global organization. Volunteers from every country are welcome, and international volunteers are especially valuable as chapter leaders.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── FOOTER ───────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo.png" alt="ProtoSpark Logo" class="logo-img" />
+            <span class="logo-text">Proto<span class="logo-accent">Spark</span></span>
+          </a>
+          <p>A 501(c)(3) nonprofit dedicated to free computer science education for children worldwide.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h5>Pages</h5>
+            <a href="index.html">Home</a>
+            <a href="summer-camp.html">Summer Camp</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="team.html">Our Team</a>
+          </div>
+          <div class="footer-col">
+            <h5>Contact</h5>
+            <a href="mailto:contact@protospark.org">contact@protospark.org</a>
+            <a href="summer-camp.html#faq">Camp FAQ</a>
+            <a href="#faq">Volunteer FAQ</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ProtoSpark · 501(c)(3) Nonprofit</span>
+        <span class="mono" style="font-size:0.8rem; opacity:0.4;">Built with ❤️ by high schoolers</span>
+      </div>
+      <div class="footer-scratch-disclaimer">
+        Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab. See scratch.mit.edu. ProtoSpark is an independent nonprofit organization and is not affiliated with, endorsed by, or associated with MIT, the MIT Media Lab, the Scratch Foundation, or the Scratch Team. The Scratch name and logo are trademarks of MIT.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProtoSpark — Free Coding Camp for Kids Worldwide</title>
+  <meta name="description" content="ProtoSpark is a free, student-led 501(c)(3) nonprofit teaching children ages 6–13 to code through virtual Scratch camps. No cost, no prior experience needed — open to kids worldwide." />
+  <meta name="keywords" content="free coding camp for kids, virtual coding camp, learn Scratch programming, nonprofit coding education, kids computer science, summer coding camp 2026, free CS education" />
+  <link rel="canonical" href="https://protospark.org/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ProtoSpark — Free Coding Camp for Kids Worldwide" />
+  <meta property="og:description" content="Free virtual coding camp for children ages 6–13. Student-led 501(c)(3) nonprofit. No cost, no experience needed. Register for Summer Camp 2026." />
+  <meta property="og:url" content="https://protospark.org/" />
+  <meta property="og:image" content="https://protospark.org/assets/logo.png" />
+  <meta property="og:site_name" content="ProtoSpark" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ProtoSpark — Free Coding Camp for Kids Worldwide" />
+  <meta name="twitter:description" content="Free virtual coding camp for children ages 6–13. Student-led 501(c)(3) nonprofit. No cost, no experience needed." />
+  <meta name="twitter:image" content="https://protospark.org/assets/logo.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ProtoSpark",
+    "url": "https://protospark.org",
+    "logo": "https://protospark.org/assets/logo.png",
+    "description": "A free, student-led 501(c)(3) nonprofit providing virtual coding education to children ages 6–13 worldwide through Scratch programming camps.",
+    "email": "contact@protospark.org",
+    "foundingDate": "2024",
+    "nonprofitStatus": "Nonprofit501c3",
+    "knowsAbout": ["Scratch programming", "Computer science education", "Kids coding", "STEM education"]
+  }
+  </script>
+  <!-- OWASP A05: Content Security Policy — restricts resource origins to mitigate XSS.
+       'unsafe-inline' required for inline scripts; nonces need a server-side build step. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com; connect-src 'self' https:;" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ───────────────── NAV ───────────────── -->
+  <header class="nav-wrapper">
+    <nav class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="ProtoSpark Logo" class="logo-img" />
+        <span class="logo-text">Proto<span class="logo-accent">Spark</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="summer-camp.html">Summer Camp</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="team.html">Our Team</a></li>
+      </ul>
+      <a href="summer-camp.html" class="btn btn-nav">Register a Student</a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="nav-dropdown" id="nav-dropdown">
+      <a href="index.html">Home</a>
+      <a href="summer-camp.html">Summer Camp</a>
+      <a href="volunteer.html">Volunteer</a>
+      <a href="team.html">Our Team</a>
+      <a href="summer-camp.html" class="btn btn-nav">Register a Student</a>
+    </div>
+  </header>
+
+  <!-- ───────────────── HERO ───────────────── -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        501(c)(3) Nonprofit
+      </div>
+      <h1 class="hero-title">
+        We <span class="highlight-pink">Ignite</span> Young<br />
+        Coders <span class="highlight-teal">Worldwide</span>
+      </h1>
+      <p class="hero-sub">
+        Free CS education for every child — no barriers, no cost. We're a student-led nonprofit, and this summer we're making it happen.
+      </p>
+      <div class="hero-cta">
+        <a href="summer-camp.html" class="btn btn-primary">Register a Student</a>
+        <a href="volunteer.html" class="btn btn-ghost">Volunteer / Teach</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num"><span class="counter" data-count="300">300</span><span class="stat-plus">+</span></span>
+          <span class="stat-label">Students Taught</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num"><span class="counter" data-count="100">100</span><span class="stat-plus">+</span></span>
+          <span class="stat-label">Hours of Teaching</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">🌍</span>
+          <span class="stat-label">Multiple Countries</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="scratch-window">
+        <div class="window-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="window-title">protospark_project.sb3</span>
+        </div>
+        <div class="window-body">
+          <div class="code-block purple">when 🏁 clicked</div>
+          <div class="code-block blue">move <span class="code-val">10</span> steps</div>
+          <div class="code-block blue">turn ↻ <span class="code-val">15</span> degrees</div>
+          <div class="code-block yellow">if <span class="code-val">touching edge?</span> then</div>
+          <div class="code-block pink indent">play sound <span class="code-val">Meow</span></div>
+          <div class="code-block yellow">end</div>
+          <div class="code-block blue">broadcast <span class="code-val">spark!</span></div>
+        </div>
+      </div>
+      <div class="floating-tag tag-1">🐱 Sprites</div>
+      <div class="floating-tag tag-2">🎵 Sounds</div>
+      <div class="floating-tag tag-3">⚡ Events</div>
+      <div class="floating-tag tag-4">🌍 Global</div>
+    </div>
+  </section>
+
+  <!-- ───────────────── ABOUT ───────────────── -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-label">Our Mission</div>
+      <h2 class="section-title">Code Should Have <span class="highlight-purple">No Borders</span></h2>
+      <p class="section-sub">
+        ProtoSpark was founded by high school students who believe every child — regardless of country, language, or background — deserves access to quality computer science education. We host free, virtual coding camps designed to build critical thinking, creativity, and real-world problem-solving skills — and every camper leaves with something to show for it.
+      </p>
+      <div class="about-cards">
+        <div class="about-card card-pink">
+          <div class="card-icon">🎯</div>
+          <h3>Free &amp; Accessible</h3>
+          <p>100% free for students. We work to translate curriculum into multiple languages so no child is left behind.</p>
+        </div>
+        <div class="about-card card-teal">
+          <div class="card-icon">🌐</div>
+          <h3>International Reach</h3>
+          <p>We organize chapters country-by-country, led by local volunteer leaders who bridge language and time-zone gaps.</p>
+        </div>
+        <div class="about-card card-purple">
+          <div class="card-icon">🚀</div>
+          <h3>Student-Led</h3>
+          <p>Founded and run entirely by high schoolers — passionate about giving back and building real leadership experience.</p>
+        </div>
+        <div class="about-card card-yellow">
+          <div class="card-icon">🔮</div>
+          <h3>Future-Ready Skills</h3>
+          <p>We teach the thinking, not just the tool. Students build problem-solving instincts and logical reasoning that translate far beyond coding — and leave with a real project to prove it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── CAMP TEASER ───────────────── -->
+  <section class="camp-teaser-section section" style="padding-top: 0;">
+    <div class="container">
+      <div class="camp-teaser">
+        <!-- animated sparkles -->
+        <div class="teaser-spark ts-1">✦</div>
+        <div class="teaser-spark ts-2">✦</div>
+        <div class="teaser-spark ts-3">✦</div>
+        <div class="teaser-spark ts-4">✦</div>
+        <div class="teaser-spark ts-5">✦</div>
+        <!-- Featured badge: top-right corner of card -->
+        <span class="camp-featured-badge">🔥 Featured</span>
+        <div style="position:relative; z-index:1;">
+          <div class="camp-teaser-label">Upcoming Event</div>
+          <h2>Summer Camp 2026 ☀️</h2>
+          <p>Free virtual camp · August 3–7, 2026 · Ages 6–13 · Learn to code with Scratch, build critical thinking skills, and finish with a real capstone project · 100% free.</p>
+        </div>
+        <a href="summer-camp.html" class="btn btn-white" style="position:relative; z-index:1;">See Camp Details →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── VOLUNTEER TEASER ───────────────── -->
+  <section class="vol-teaser section" id="volunteer-teaser">
+    <div class="container">
+      <div class="vol-teaser-inner">
+        <div>
+          <div class="section-label">Get Involved</div>
+          <h2 class="section-title">Join Our <span class="highlight-pink">Team</span></h2>
+          <p style="color: var(--text-mid); font-size: 1rem; line-height: 1.7; max-width: 460px;">
+            Help teach kids to code, lead a country chapter, or translate curriculum. ProtoSpark is built entirely by passionate volunteers — and we'd love to have you.
+          </p>
+          <ul class="vol-teaser-list">
+            <li><span class="vol-check">✓</span> Lead a country chapter</li>
+            <li><span class="vol-check">✓</span> Teach or assist sessions</li>
+            <li><span class="vol-check">✓</span> Translate curriculum materials</li>
+            <li><span class="vol-check">✓</span> Official role with a registered 501(c)(3)</li>
+          </ul>
+          <a href="volunteer.html" class="btn btn-secondary">Apply to Volunteer →</a>
+        </div>
+        <div class="vol-teaser-visual">
+          <div class="vol-mini-card">
+            <div class="icon">🗺️</div>
+            <h4>Chapter Leader</h4>
+            <p>Run your country's chapter and recruit local students.</p>
+          </div>
+          <div class="vol-mini-card">
+            <div class="icon">👩‍🏫</div>
+            <h4>Instructor</h4>
+            <p>Teach live Scratch sessions with our ready-made curriculum.</p>
+          </div>
+          <div class="vol-mini-card">
+            <div class="icon">🌐</div>
+            <h4>Translator</h4>
+            <p>Translate lessons so kids learn in their native language.</p>
+          </div>
+          <div class="vol-mini-card">
+            <div class="icon">📣</div>
+            <h4>Outreach</h4>
+            <p>Create content and spread the word about ProtoSpark.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── FOOTER ───────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo.png" alt="ProtoSpark Logo" class="logo-img" />
+            <span class="logo-text">Proto<span class="logo-accent">Spark</span></span>
+          </a>
+          <p>A 501(c)(3) nonprofit dedicated to free computer science education for children worldwide.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h5>Pages</h5>
+            <a href="index.html">Home</a>
+            <a href="summer-camp.html">Summer Camp</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="team.html">Our Team</a>
+          </div>
+          <div class="footer-col">
+            <h5>Contact</h5>
+            <a href="mailto:contact@protospark.org">contact@protospark.org</a>
+            <a href="summer-camp.html#faq">Camp FAQ</a>
+            <a href="volunteer.html#faq">Volunteer FAQ</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ProtoSpark · 501(c)(3) Nonprofit</span>
+        <span class="mono" style="font-size:0.8rem; opacity:0.4;">Built with ❤️ by high schoolers</span>
+      </div>
+      <div class="footer-scratch-disclaimer">
+        Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab. See scratch.mit.edu. ProtoSpark is an independent nonprofit organization and is not affiliated with, endorsed by, or associated with MIT, the MIT Media Lab, the Scratch Foundation, or the Scratch Team. The Scratch name and logo are trademarks of MIT.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

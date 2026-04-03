@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team — ProtoSpark | Student-Led Nonprofit</title>
+  <meta name="description" content="Meet the high school students behind ProtoSpark — a free, student-led 501(c)(3) nonprofit bringing coding education to children worldwide. Founders, directors, and global chapter leaders." />
+  <meta name="keywords" content="ProtoSpark team, student nonprofit founders, coding nonprofit leadership, student-led organization, high school nonprofit" />
+  <link rel="canonical" href="https://protospark.org/team.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Our Team — ProtoSpark | Student-Led Nonprofit" />
+  <meta property="og:description" content="Meet the high school students behind ProtoSpark — a free 501(c)(3) nonprofit bringing coding education to children worldwide." />
+  <meta property="og:url" content="https://protospark.org/team.html" />
+  <meta property="og:image" content="https://protospark.org/assets/logo.png" />
+  <meta property="og:site_name" content="ProtoSpark" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Our Team — ProtoSpark | Student-Led Nonprofit" />
+  <meta name="twitter:description" content="Meet the high school students behind ProtoSpark — a free 501(c)(3) nonprofit bringing coding education to children worldwide." />
+  <meta name="twitter:image" content="https://protospark.org/assets/logo.png" />
+  <!-- OWASP A05: Content Security Policy — restricts resource origins to mitigate XSS.
+       'unsafe-inline' required for inline scripts; nonces need a server-side build step. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com; connect-src 'self' https:;" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .team-avatar.purple { background: var(--purple-light); }
+    .team-avatar.pink   { background: var(--pink-light); }
+    .team-avatar.teal   { background: var(--teal-light); }
+    .team-avatar.yellow { background: var(--yellow-light); }
+    .team-card .role { display: block; }
+    .join-team-card {
+      background: linear-gradient(135deg, var(--purple-light) 0%, var(--pink-light) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 56px;
+      text-align: center;
+      margin-top: 24px;
+    }
+    .join-team-card h3 { font-size: 1.6rem; margin-bottom: 12px; }
+    .join-team-card p  { color: var(--text-mid); max-width: 480px; margin: 0 auto 28px; line-height: 1.7; }
+    .team-photo {
+      width: 88px; height: 88px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      border: 3px solid var(--border);
+      margin: 0 auto 14px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ───────────────── NAV ───────────────── -->
+  <header class="nav-wrapper">
+    <nav class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="ProtoSpark Logo" class="logo-img" />
+        <span class="logo-text">Proto<span class="logo-accent">Spark</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="summer-camp.html">Summer Camp</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="team.html" aria-current="page">Our Team</a></li>
+      </ul>
+      <a href="summer-camp.html" class="btn btn-nav">Register a Student</a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="nav-dropdown" id="nav-dropdown">
+      <a href="index.html">Home</a>
+      <a href="summer-camp.html">Summer Camp</a>
+      <a href="volunteer.html">Volunteer</a>
+      <a href="team.html">Our Team</a>
+      <a href="summer-camp.html" class="btn btn-nav">Register a Student</a>
+    </div>
+  </header>
+
+  <!-- ───────────────── PAGE HERO ───────────────── -->
+  <section class="page-hero" style="background: linear-gradient(135deg, var(--teal-light) 0%, var(--bg) 100%);">
+    <div class="container page-hero-inner">
+      <div class="page-hero-content">
+        <div class="page-hero-label">The People</div>
+        <h1>The Team Behind <span class="highlight-teal">ProtoSpark</span> 👥</h1>
+        <p>ProtoSpark is built and run entirely by passionate high school students. Meet the co-founders making free computer science education a reality for children worldwide.</p>
+      </div>
+      <div class="page-hero-deco">
+        <div class="team-globe-widget">
+          <div class="tgw-rings">
+            <div class="tgw-ring tgw-r1"></div>
+            <div class="tgw-ring tgw-r2"></div>
+            <div class="tgw-ring tgw-r3"></div>
+          </div>
+          <div class="tgw-center"><span class="tgw-center-inner">🌍</span></div>
+          <div class="tgw-pin tgw-p1"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/us.png" alt="US" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span><span class="tgw-label">USA</span></div>
+          <div class="tgw-pin tgw-p2"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/in.png" alt="IN" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span><span class="tgw-label">India</span></div>
+          <div class="tgw-pin tgw-p3"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/ng.png" alt="NG" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span><span class="tgw-label">Nigeria</span></div>
+          <div class="tgw-pin tgw-p4"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/br.png" alt="BR" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span><span class="tgw-label">Brazil</span></div>
+          <div class="tgw-pin tgw-p5"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/ph.png" alt="PH" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span><span class="tgw-label">Philippines</span></div>
+          <div class="tgw-pin tgw-p6"><span class="tgw-flag"><img src="https://flagcdn.com/24x18/gb.png" alt="GB" style="width:1.4rem;height:auto;vertical-align:middle;border-radius:2px;"></span><span class="tgw-label">UK</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── LEADERSHIP ───────────────── -->
+  <section class="team-section section" id="leadership">
+    <div class="container">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">Founders &amp; <span class="highlight-purple">Directors</span></h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="assets/ananya.jpg" alt="Ananya Karthick" class="team-photo" />
+          <h3>Ananya Karthick</h3>
+          <span class="role">Co-Founder &amp; Executive Director</span>
+          <p>Ananya is a sophomore in the IB program at J. R. Tucker High School, passionate about leadership and social impact. She co-founded ProtoSpark to ensure every child, no matter where they grow up, has equal access to quality CS education.</p>
+        </div>
+        <div class="team-card">
+          <img src="assets/akshith.jpg" alt="Akshith Nair" class="team-photo" />
+          <h3>Akshith Nair</h3>
+          <span class="role">Co-Founder &amp; Executive Director</span>
+          <p>Akshith is a sophomore at Deep Run High School's Center for Information Technology, passionate about computer science and real-world impact. He co-founded ProtoSpark to empower kids worldwide through accessible, engaging technology education.</p>
+        </div>
+        <div class="team-card">
+          <img src="assets/harshika.jpg" alt="Harshika Thouti" class="team-photo" />
+          <h3>Harshika Thouti</h3>
+          <span class="role">Co-Founder &amp; Executive Director</span>
+          <p>Harshika is a sophomore at Deep Run High School's Center for Information Technology, passionate about innovation and entrepreneurship. She co-founded ProtoSpark to make STEM more accessible and engaging for kids around the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── CHAPTER LEADERS ───────────────── -->
+  <section class="section" style="background: var(--bg);" id="chapters">
+    <div class="container">
+      <div class="section-label">Global Network</div>
+      <h2 class="section-title">Our <span class="highlight-teal">Chapter Leaders</span></h2>
+      <p class="section-sub">Chapter leaders are the backbone of ProtoSpark — they recruit students, bridge language gaps, and bring our mission to life in their countries.</p>
+      <div class="team-grid">
+        <div class="team-card coming-soon">
+          <div class="team-avatar teal"><img src="https://flagcdn.com/40x30/us.png" alt="US" style="width:2rem;height:auto;border-radius:3px;"></div>
+          <h3>United States</h3>
+          <span class="role">Chapter Leader</span>
+          <p>Leading the US chapter, recruiting students from across the country for virtual camp sessions.</p>
+        </div>
+        <div class="team-card coming-soon">
+          <div class="team-avatar yellow"><img src="https://flagcdn.com/40x30/in.png" alt="IN" style="width:2rem;height:auto;border-radius:3px;"></div>
+          <h3>India</h3>
+          <span class="role">Chapter Leader</span>
+          <p>Bridging Hindi and English to bring ProtoSpark's curriculum to students across India.</p>
+        </div>
+        <div class="team-card coming-soon">
+          <div class="team-avatar pink"><img src="https://flagcdn.com/40x30/ng.png" alt="NG" style="width:2rem;height:auto;border-radius:3px;"></div>
+          <h3>Nigeria</h3>
+          <span class="role">Chapter Leader</span>
+          <p>Growing ProtoSpark's presence across West Africa with multilingual support for students.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── JOIN THE TEAM ───────────────── -->
+  <section class="section" style="background: var(--bg-alt);">
+    <div class="container container-narrow">
+      <div class="join-team-card">
+        <h3>Want to Join the Team? ✨</h3>
+        <p>We're always looking for passionate, motivated young people to help bring free coding education to children worldwide. No prior experience required — just enthusiasm and commitment.</p>
+        <a href="volunteer.html" class="btn btn-primary">Apply to Volunteer →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── FOOTER ───────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo.png" alt="ProtoSpark Logo" class="logo-img" />
+            <span class="logo-text">Proto<span class="logo-accent">Spark</span></span>
+          </a>
+          <p>A 501(c)(3) nonprofit dedicated to free computer science education for children worldwide.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h5>Pages</h5>
+            <a href="index.html">Home</a>
+            <a href="summer-camp.html">Summer Camp</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="team.html">Our Team</a>
+          </div>
+          <div class="footer-col">
+            <h5>Contact</h5>
+            <a href="mailto:contact@protospark.org">contact@protospark.org</a>
+            <a href="summer-camp.html#faq">Camp FAQ</a>
+            <a href="volunteer.html#faq">Volunteer FAQ</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ProtoSpark · 501(c)(3) Nonprofit</span>
+        <span class="mono" style="font-size:0.8rem; opacity:0.4;">Built with ❤️ by high schoolers</span>
+      </div>
+      <div class="footer-scratch-disclaimer">
+        Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab. See scratch.mit.edu. ProtoSpark is an independent nonprofit organization and is not affiliated with, endorsed by, or associated with MIT, the MIT Media Lab, the Scratch Foundation, or the Scratch Team. The Scratch name and logo are trademarks of MIT.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
