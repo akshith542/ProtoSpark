@@ -444,152 +444,89 @@ async function submitForm(form, type, subject, successMsg) {
   setInterval(update, 2400);
 })();
 
-/* ── Translation via MyMemory API ── */
-let _txLang = 'en';
-const _txSEP = '\u25C6\u25C6';
-const _txMAX = 460;
+/* ── Translation via MyMemory API (no API key required) ── */
+const _originals = new Map();
+let _currentLang = 'en';
+const SEP = ' \u25C6 ';
+const MAX_CHARS = 450;
+const TX_SELECTORS = 'h1,h2,h3,h4,p,li,label,summary,.btn,.section-label,.page-hero-label,.camp-teaser-label,.stat-label,.day-content strong,.camp-detail div strong,.req-card h3,.vol-check+*';
 
-// Elements whose text should never be translated
-const _txSkipSel = [
-  'script','style','noscript',
-  '.code-block','.window-bar','.window-title','.logo-text',
-  '.mono','.badge-dot','.step-num','.day-badge',
-  '.btn-spinner','.floating-tag','#lang-selector'
-].join(',');
-
-const _origTextNodes = new Map(); // text node  → original string
-const _origAttrs     = new Map(); // element    → original attr string
-
-function _buildSkipSet() {
-  const s = new Set();
-  document.querySelectorAll(_txSkipSel).forEach(el => s.add(el));
-  return s;
-}
-
-function _isSkipped(node, skipSet) {
-  let p = node.nodeType === 3 ? node.parentElement : node;
-  while (p && p !== document.body) {
-    if (skipSet.has(p)) return true;
-    p = p.parentElement;
-  }
-  return false;
-}
-
-function _collectTextNodes(skipSet) {
-  const nodes = [];
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  let n;
-  while ((n = walker.nextNode())) {
-    const t = n.textContent.trim();
-    if (t.length < 2 || t.length > 400) continue;
-    if (/^[\d\s\.\-\+\(\)\/°%€$£¥]+$/.test(t)) continue; // skip numbers-only
-    if (_isSkipped(n, skipSet)) continue;
-    nodes.push(n);
-  }
-  return nodes;
-}
-
-function _collectAttrs(skipSet) {
-  const els = [];
-  document.querySelectorAll('[placeholder]').forEach(el => {
-    if (el.placeholder.trim().length > 1 && !_isSkipped(el, skipSet)) els.push({ el, type: 'placeholder' });
+function _getLeaves() {
+  return [...document.querySelectorAll(TX_SELECTORS)].filter(el => {
+    if (el.querySelector('*')) return false;           // skip elements with child tags
+    const t = el.textContent.trim();
+    if (t.length < 2 || t.length > 400) return false;
+    if (el.closest('.nav-wrapper,.footer,.code-block,.schedule-header,.mono,.faq-item p')) return false;
+    return true;
   });
-  document.querySelectorAll('option[value]').forEach(el => {
-    if (el.textContent.trim().length > 1 && !_isSkipped(el, skipSet)) els.push({ el, type: 'option' });
-  });
-  return els;
 }
 
-async function _apiBatch(texts, lang) {
-  // Group into chunks ≤ _txMAX chars
-  const chunks = [], chunkStarts = [];
-  let chunk = [], chars = 0, start = 0;
-  texts.forEach((t, i) => {
-    if (chars + t.length + _txSEP.length > _txMAX && chunk.length) {
-      chunks.push(chunk); chunkStarts.push(start);
-      chunk = []; chars = 0; start = i;
+async function _fetchBatch(texts, lang) {
+  const q = texts.join(SEP);
+  try {
+    const res = await fetch(
+      'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(q) + '&langpair=en|' + lang
+    );
+    const data = await res.json();
+    if (data.responseStatus === 200) {
+      return data.responseData.translatedText.split(SEP).map(s => s.trim());
     }
-    chunk.push(t); chars += t.length + _txSEP.length;
-  });
-  if (chunk.length) { chunks.push(chunk); chunkStarts.push(start); }
-
-  const results = new Array(texts.length);
-  await Promise.all(chunks.map(async (c, ci) => {
-    const s = chunkStarts[ci];
-    try {
-      const res = await fetch(
-        'https://api.mymemory.translated.net/get?q=' +
-        encodeURIComponent(c.join(' ' + _txSEP + ' ')) +
-        '&langpair=en|' + lang
-      );
-      const d = await res.json();
-      if (d.responseStatus === 200) {
-        const parts = d.responseData.translatedText.split(' ' + _txSEP + ' ');
-        c.forEach((orig, j) => { results[s + j] = (parts[j] || '').trim() || orig; });
-        return;
-      }
-    } catch(_) {}
-    c.forEach((orig, j) => { results[s + j] = orig; });
-  }));
-  return results;
+  } catch(e) {}
+  return texts;
 }
 
 async function translatePage(lang) {
-  if (lang === _txLang) return;
-  _txLang = lang;
+  if (lang === _currentLang) return;
+  _currentLang = lang;
 
-  const skipSet   = _buildSkipSet();
-  const textNodes = _collectTextNodes(skipSet);
-  const attrItems = _collectAttrs(skipSet);
-  const labelEl   = document.getElementById('lang-label');
+  const els = _getLeaves();
 
   if (lang === 'en') {
-    textNodes.forEach(n => { if (_origTextNodes.has(n)) n.textContent = _origTextNodes.get(n); });
-    attrItems.forEach(({ el, type }) => {
-      const orig = _origAttrs.get(el);
-      if (!orig) return;
-      if (type === 'placeholder') el.placeholder = orig;
-      else el.textContent = orig;
-    });
+    els.forEach(el => { if (_originals.has(el)) el.textContent = _originals.get(el); });
     return;
   }
 
-  // Save originals
-  textNodes.forEach(n => { if (!_origTextNodes.has(n)) _origTextNodes.set(n, n.textContent); });
-  attrItems.forEach(({ el, type }) => {
-    if (!_origAttrs.has(el)) _origAttrs.set(el, type === 'placeholder' ? el.placeholder : el.textContent);
-  });
+  // Save originals once
+  els.forEach(el => { if (!_originals.has(el)) _originals.set(el, el.textContent.trim()); });
+  const texts = els.map(el => _originals.get(el));
 
-  // Cache check
-  const cacheKey = 'ps_tx3_' + lang + '_' + location.pathname;
+  // Check sessionStorage cache
+  const cacheKey = 'ps_tx_' + lang + '_' + location.pathname;
   const cached = sessionStorage.getItem(cacheKey);
   if (cached) {
-    const { nt, at } = JSON.parse(cached);
-    textNodes.forEach((n, i) => { if (nt[i]) n.textContent = nt[i]; });
-    attrItems.forEach(({ el, type }, i) => {
-      if (!at[i]) return;
-      if (type === 'placeholder') el.placeholder = at[i]; else el.textContent = at[i];
-    });
+    const tr = JSON.parse(cached);
+    els.forEach((el, i) => { if (tr[i]) el.textContent = tr[i]; });
     return;
   }
 
+  // Show loading indicator
+  const labelEl = document.getElementById('lang-label');
   if (labelEl) labelEl.textContent = '...';
 
-  const ntSrc = textNodes.map(n => _origTextNodes.get(n).trim());
-  const atSrc = attrItems.map(({ el, type }) => _origAttrs.get(el) || '');
+  // Build batches under MAX_CHARS and fetch in parallel
+  const batches = [];
+  let i = 0;
+  while (i < texts.length) {
+    const batch = [];
+    let chars = 0;
+    while (i < texts.length && chars + texts[i].length + SEP.length < MAX_CHARS) {
+      batch.push(texts[i]);
+      chars += texts[i].length + SEP.length;
+      i++;
+    }
+    if (!batch.length) { batch.push(texts[i]); i++; }
+    batches.push({ start: i - batch.length, texts: batch });
+  }
 
-  const [nt, at] = await Promise.all([
-    _apiBatch(ntSrc, lang),
-    atSrc.length ? _apiBatch(atSrc, lang) : Promise.resolve([]),
-  ]);
+  const results = new Array(texts.length);
+  await Promise.all(batches.map(async b => {
+    const tr = await _fetchBatch(b.texts, lang);
+    tr.forEach((t, j) => { results[b.start + j] = t || b.texts[j]; });
+  }));
 
-  textNodes.forEach((n, i) => { if (nt[i]) n.textContent = nt[i]; });
-  attrItems.forEach(({ el, type }, i) => {
-    if (!at[i]) return;
-    if (type === 'placeholder') el.placeholder = at[i]; else el.textContent = at[i];
-  });
-
-  sessionStorage.setItem(cacheKey, JSON.stringify({ nt, at }));
+  // Apply and cache
+  els.forEach((el, i) => { if (results[i]) el.textContent = results[i]; });
+  sessionStorage.setItem(cacheKey, JSON.stringify(results));
   if (labelEl) labelEl.textContent = sessionStorage.getItem('ps-lang-label') || lang.toUpperCase();
 }
 
