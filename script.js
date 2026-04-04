@@ -453,18 +453,30 @@ function googleTranslateElementInit() {
   }, 'google_translate_element');
 }
 
+function _applyLang(code, attempts) {
+  const select = document.querySelector('.goog-te-combo');
+  if (select) {
+    select.value = code;
+    select.dispatchEvent(new Event('change'));
+  } else if (attempts < 30) {
+    setTimeout(() => _applyLang(code, attempts + 1), 200);
+  }
+}
+
 function changeLang(code, label) {
   document.getElementById('lang-menu')?.classList.remove('open');
-  const exp = new Date(0).toUTCString();
+  const labelEl = document.getElementById('lang-label');
   if (code === 'en') {
-    document.cookie = 'googtrans=; path=/; expires=' + exp;
-    document.cookie = 'googtrans=; path=/; domain=.' + location.hostname + '; expires=' + exp;
-  } else {
-    const val = '/en/' + code;
-    document.cookie = 'googtrans=' + val + '; path=/';
-    document.cookie = 'googtrans=' + val + '; path=/; domain=.' + location.hostname;
+    sessionStorage.removeItem('ps-lang');
+    sessionStorage.removeItem('ps-lang-label');
+    if (labelEl) labelEl.textContent = 'EN';
+    _applyLang('en', 0);
+    return;
   }
-  window.location.reload();
+  if (labelEl) labelEl.textContent = label;
+  sessionStorage.setItem('ps-lang', code);
+  sessionStorage.setItem('ps-lang-label', label);
+  _applyLang(code, 0);
 }
 
 function toggleLangMenu() {
@@ -477,6 +489,16 @@ document.addEventListener('click', e => {
     document.getElementById('lang-menu')?.classList.remove('open');
   }
 });
+
+// Restore language on page load/navigation
+(function restoreLang() {
+  const code  = sessionStorage.getItem('ps-lang');
+  const label = sessionStorage.getItem('ps-lang-label');
+  if (!code) return;
+  const labelEl = document.getElementById('lang-label');
+  if (labelEl) labelEl.textContent = label;
+  _applyLang(code, 0);
+})();
 
 /* ── Student Form ── */
 document.getElementById('student-form')?.addEventListener('submit', async (e) => {
