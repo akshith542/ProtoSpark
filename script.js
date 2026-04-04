@@ -445,28 +445,14 @@ async function submitForm(form, type, subject, successMsg) {
 })();
 
 /* ── Language selector ── */
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    includedLanguages: 'fr,es,ar,pt,yo,hi,de,zh-CN,it',
-  }, 'google_translate_element');
-}
-
-function changeLang(code, label) {
+function changeLang(code) {
   document.getElementById('lang-menu')?.classList.remove('open');
-  const exp = 'expires=Thu, 01 Jan 1970 00:00:01 GMT';
   if (code === 'en') {
-    document.cookie = 'googtrans=; path=/; ' + exp;
-    document.cookie = 'googtrans=; path=/; domain=.' + location.hostname + '; ' + exp;
-    sessionStorage.removeItem('ps-lang');
-    sessionStorage.removeItem('ps-lang-label');
-  } else {
-    document.cookie = 'googtrans=/en/' + code + '; path=/';
-    document.cookie = 'googtrans=/en/' + code + '; path=/; domain=.' + location.hostname;
-    sessionStorage.setItem('ps-lang', code);
-    sessionStorage.setItem('ps-lang-label', label);
+    window.location.href = 'https://protospark.org' + window.location.pathname;
+    return;
   }
-  window.location.reload();
+  const page = encodeURIComponent('https://protospark.org' + window.location.pathname);
+  window.location.href = 'https://translate.google.com/translate?hl=en&sl=en&tl=' + code + '&u=' + page;
 }
 
 function toggleLangMenu() {
@@ -479,15 +465,6 @@ document.addEventListener('click', e => {
     document.getElementById('lang-menu')?.classList.remove('open');
   }
 });
-
-// Restore button label after reload
-(function() {
-  const label = sessionStorage.getItem('ps-lang-label');
-  if (label) {
-    const el = document.getElementById('lang-label');
-    if (el) el.textContent = label;
-  }
-})();
 
 /* ── Student Form ── */
 document.getElementById('student-form')?.addEventListener('submit', async (e) => {
