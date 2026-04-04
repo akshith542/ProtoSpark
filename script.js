@@ -454,20 +454,17 @@ function googleTranslateElementInit() {
 }
 
 function changeLang(code, label) {
-  if (code === 'en') {
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname;
-    window.location.reload();
-    return;
-  }
-  const select = document.querySelector('.goog-te-combo');
-  if (select) {
-    select.value = code;
-    select.dispatchEvent(new Event('change'));
-  }
-  const labelEl = document.getElementById('lang-label');
-  if (labelEl) labelEl.textContent = label;
   document.getElementById('lang-menu')?.classList.remove('open');
+  const exp = new Date(0).toUTCString();
+  if (code === 'en') {
+    document.cookie = 'googtrans=; path=/; expires=' + exp;
+    document.cookie = 'googtrans=; path=/; domain=.' + location.hostname + '; expires=' + exp;
+  } else {
+    const val = '/en/' + code;
+    document.cookie = 'googtrans=' + val + '; path=/';
+    document.cookie = 'googtrans=' + val + '; path=/; domain=.' + location.hostname;
+  }
+  window.location.reload();
 }
 
 function toggleLangMenu() {
