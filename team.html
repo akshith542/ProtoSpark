@@ -66,6 +66,21 @@
         <li><a href="volunteer.html">Volunteer</a></li>
         <li><a href="team.html" aria-current="page">Our Team</a></li>
       </ul>
+      <div class="lang-selector" id="lang-selector">
+        <button class="lang-btn" onclick="toggleLangMenu()" aria-label="Select language">🌐 <span id="lang-label">EN</span> ▾</button>
+        <div class="lang-menu" id="lang-menu">
+          <button onclick="changeLang('en','EN')">English</button>
+          <button onclick="changeLang('fr','FR')">Français</button>
+          <button onclick="changeLang('es','ES')">Español</button>
+          <button onclick="changeLang('ar','AR')">العربية</button>
+          <button onclick="changeLang('pt','PT')">Português</button>
+          <button onclick="changeLang('yo','YO')">Yoruba (Nigerian)</button>
+          <button onclick="changeLang('hi','HI')">हिन्दी</button>
+          <button onclick="changeLang('de','DE')">Deutsch</button>
+          <button onclick="changeLang('zh-CN','ZH')">中文</button>
+          <button onclick="changeLang('it','IT')">Italiano</button>
+        </div>
+      </div>
       <a href="summer-camp.html" class="btn btn-nav">Register a Student</a>
       <button class="nav-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -212,6 +227,8 @@
     </div>
   </footer>
 
+  <div id="google_translate_element" style="display:none"></div>
   <script src="script.js"></script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

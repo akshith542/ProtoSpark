@@ -444,6 +444,43 @@ async function submitForm(form, type, subject, successMsg) {
   setInterval(update, 2400);
 })();
 
+/* ── Language selector ── */
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'fr,es,ar,pt,yo,hi,de,zh-CN,it',
+    autoDisplay: false,
+  }, 'google_translate_element');
+}
+
+function changeLang(code, label) {
+  if (code === 'en') {
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname;
+    window.location.reload();
+    return;
+  }
+  const select = document.querySelector('.goog-te-combo');
+  if (select) {
+    select.value = code;
+    select.dispatchEvent(new Event('change'));
+  }
+  const labelEl = document.getElementById('lang-label');
+  if (labelEl) labelEl.textContent = label;
+  document.getElementById('lang-menu')?.classList.remove('open');
+}
+
+function toggleLangMenu() {
+  document.getElementById('lang-menu')?.classList.toggle('open');
+}
+
+document.addEventListener('click', e => {
+  const sel = document.getElementById('lang-selector');
+  if (sel && !sel.contains(e.target)) {
+    document.getElementById('lang-menu')?.classList.remove('open');
+  }
+});
+
 /* ── Student Form ── */
 document.getElementById('student-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
