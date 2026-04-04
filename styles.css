@@ -1426,7 +1426,10 @@ h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 700; line-heigh
 
 /* ── Google Translate: hide toolbar, keep translation ── */
 .goog-te-banner-frame,
-.goog-te-balloon-frame { display: none !important; }
+.goog-te-balloon-frame,
+.goog-te-ftab-float,
+#goog-gt-tt,
+.skiptranslate { display: none !important; }
 body { top: 0 !important; }
 .goog-te-gadget { display: none !important; }
 .goog-tooltip, .goog-tooltip:hover { display: none !important; }

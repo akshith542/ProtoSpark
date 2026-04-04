@@ -449,34 +449,24 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
     includedLanguages: 'fr,es,ar,pt,yo,hi,de,zh-CN,it',
-    autoDisplay: false,
   }, 'google_translate_element');
-}
-
-function _applyLang(code, attempts) {
-  const select = document.querySelector('.goog-te-combo');
-  if (select) {
-    select.value = code;
-    select.dispatchEvent(new Event('change'));
-  } else if (attempts < 30) {
-    setTimeout(() => _applyLang(code, attempts + 1), 200);
-  }
 }
 
 function changeLang(code, label) {
   document.getElementById('lang-menu')?.classList.remove('open');
-  const labelEl = document.getElementById('lang-label');
+  const exp = 'expires=Thu, 01 Jan 1970 00:00:01 GMT';
   if (code === 'en') {
+    document.cookie = 'googtrans=; path=/; ' + exp;
+    document.cookie = 'googtrans=; path=/; domain=.' + location.hostname + '; ' + exp;
     sessionStorage.removeItem('ps-lang');
     sessionStorage.removeItem('ps-lang-label');
-    if (labelEl) labelEl.textContent = 'EN';
-    _applyLang('en', 0);
-    return;
+  } else {
+    document.cookie = 'googtrans=/en/' + code + '; path=/';
+    document.cookie = 'googtrans=/en/' + code + '; path=/; domain=.' + location.hostname;
+    sessionStorage.setItem('ps-lang', code);
+    sessionStorage.setItem('ps-lang-label', label);
   }
-  if (labelEl) labelEl.textContent = label;
-  sessionStorage.setItem('ps-lang', code);
-  sessionStorage.setItem('ps-lang-label', label);
-  _applyLang(code, 0);
+  window.location.reload();
 }
 
 function toggleLangMenu() {
@@ -490,14 +480,13 @@ document.addEventListener('click', e => {
   }
 });
 
-// Restore language on page load/navigation
-(function restoreLang() {
-  const code  = sessionStorage.getItem('ps-lang');
+// Restore button label after reload
+(function() {
   const label = sessionStorage.getItem('ps-lang-label');
-  if (!code) return;
-  const labelEl = document.getElementById('lang-label');
-  if (labelEl) labelEl.textContent = label;
-  _applyLang(code, 0);
+  if (label) {
+    const el = document.getElementById('lang-label');
+    if (el) el.textContent = label;
+  }
 })();
 
 /* ── Student Form ── */
