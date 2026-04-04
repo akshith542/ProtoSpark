@@ -445,21 +445,24 @@ async function submitForm(form, type, subject, successMsg) {
 })();
 
 /* ── Language selector ── */
-function changeLang(code) {
-  document.getElementById('lang-menu')?.classList.remove('open');
-  if (code === 'en') {
-    window.location.href = 'https://protospark.org' + window.location.pathname;
-    return;
-  }
-  const page = encodeURIComponent('https://protospark.org' + window.location.pathname);
-  window.location.href = 'https://translate.google.com/translate?hl=en&sl=en&tl=' + code + '&u=' + page;
-}
-
 function toggleLangMenu() {
-  document.getElementById('lang-menu')?.classList.toggle('open');
+  const menu = document.getElementById('lang-menu');
+  if (!menu) return;
+  menu.classList.toggle('open');
+
+  // Set href on every link when the menu opens
+  if (menu.classList.contains('open')) {
+    const base = encodeURIComponent(location.origin + location.pathname);
+    menu.querySelectorAll('a[data-lang]').forEach(function(a) {
+      const code = a.dataset.lang;
+      a.href = code === 'en'
+        ? (location.origin + location.pathname)
+        : 'https://translate.google.com/translate?sl=en&tl=' + code + '&u=' + base;
+    });
+  }
 }
 
-document.addEventListener('click', e => {
+document.addEventListener('click', function(e) {
   const sel = document.getElementById('lang-selector');
   if (sel && !sel.contains(e.target)) {
     document.getElementById('lang-menu')?.classList.remove('open');

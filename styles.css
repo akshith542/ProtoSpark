@@ -1399,7 +1399,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 700; line-heigh
   overflow: hidden;
 }
 .lang-menu.open { display: block; }
-.lang-menu button {
+.lang-menu a {
   display: block;
   width: 100%;
   text-align: left;
@@ -1411,8 +1411,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 700; line-heigh
   color: var(--text-mid);
   cursor: pointer;
   transition: background 0.1s, color 0.1s;
+  text-decoration: none;
 }
-.lang-menu button:hover { background: var(--bg); color: var(--purple); }
+.lang-menu a:hover { background: var(--bg); color: var(--purple); }
 /* footer variant — opens upward, light colors on dark bg */
 .footer-lang .lang-btn {
   color: rgba(255,255,255,0.65);
