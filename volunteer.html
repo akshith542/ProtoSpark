@@ -333,21 +333,7 @@
       </div>
       <div class="footer-bottom">
         <span>© 2026 ProtoSpark · 501(c)(3) Nonprofit</span>
-        <div class="lang-selector footer-lang" id="lang-selector">
-          <button class="lang-btn" onclick="toggleLangMenu()" aria-label="Select language">🌐 <span id="lang-label">EN</span> ▾</button>
-          <div class="lang-menu" id="lang-menu">
-            <a data-lang="en" href="#">English</a>
-            <a data-lang="fr" href="#">Français</a>
-            <a data-lang="es" href="#">Español</a>
-            <a data-lang="ar" href="#">العربية</a>
-            <a data-lang="pt" href="#">Português</a>
-            <a data-lang="yo" href="#">Yoruba</a>
-            <a data-lang="hi" href="#">हिन्दी</a>
-            <a data-lang="de" href="#">Deutsch</a>
-            <a data-lang="zh-CN" href="#">中文</a>
-            <a data-lang="it" href="#">Italiano</a>
-          </div>
-        </div>
+        <div id="google_translate_element"></div>
         <span class="mono" style="font-size:0.8rem; opacity:0.4;">Built with ❤️ by high schoolers</span>
       </div>
       <div class="footer-scratch-disclaimer">
@@ -357,5 +343,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
